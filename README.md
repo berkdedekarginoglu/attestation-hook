@@ -1,15 +1,75 @@
-# attestation-hook
+# 🔧 attestation-hook
 
-Frida-based instrumentation script for observing Twitter Android's attestation pipeline at runtime.
+This is a complete, ready-to-use GitHub repository structure and content for your project.
 
-## Features
+---
 
-- Hooks OkHttp request execution
+
+### Key Insight
+
+Modern mobile attestation does not happen over the network.
+It happens inside the device:
+
+- via Binder IPC
+- inside privileged system processes
+- using hardware-backed keys
+
+### Features
+
+- Hooks OkHttp at execution layer (`RealCall.execute`)
 - Extracts hidden request bodies from internal structures
-- Decodes gzip responses
-- Reveals attestation-related traffic invisible to MITM tools
+- Decodes compressed responses (gzip)
+- Reveals attestation traffic (nonce, tokens, integrity calls)
 
-## Usage
-
+### Usage
 ```bash
-frida -U -f com.twitter.android -l interceptor.js --no-pause
+frida -U -f com.twitter.android -l frida/interceptor.js --no-pause
+```
+
+### Why This Matters
+
+SSL pinning bypass is not enough.
+If your proxy can't see it, you're looking at the wrong layer.
+
+### Repository Structure
+```
+frida/        → Frida instrumentation script
+examples/     → Sample logs and extracted flows
+```
+
+### Disclaimer
+
+This project is for educational and research purposes only.
+Do not use it against systems you do not own or have permission to test.
+
+
+## 🧪 examples/sample_attestation_flow.txt
+```
+POST /GenerateAttestationNonce
+  → nonce: 698b1f52-...
+
+Play Integrity Call
+  → nonce = Base64(SHA256(attestation_object))
+
+POST /GenerateAttestationTokenV2
+  → signed_attestation_object
+
+Response:
+  → X-Attest-Token (JWT)
+
+Usage:
+  → Header injected into all subsequent requests
+```
+
+
+## Article
+Full write-up: https://berkdede.medium.com/breaking-the-black-box-reverse-engineering-twitters-play-integrity-attestation-pipeline-d3dbd2cf37ae
+
+
+## 💬 Final Note
+
+This repo is not just a script dump.
+
+It is a **research companion** to your write-up.
+
+Make it reflect that.
