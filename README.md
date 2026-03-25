@@ -27,7 +27,7 @@ It happens inside the device:
 
 ## Usage
 ```bash
-frida -U -f com.twitter.android -l frida/interceptor.js --no-pause
+frida -U -f com.twitter.android -l interceptor.js
 ```
 
 ---
