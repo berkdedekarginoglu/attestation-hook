@@ -51,13 +51,6 @@ Instead of:
 TLS → Network → Proxy
 ```
 
----
-
-## Repository Structure
-```
-frida/        → Frida instrumentation script  
-examples/     → Sample logs and extracted flows  
-```
 
 ---
 
