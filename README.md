@@ -103,5 +103,4 @@ It is a research companion to the write-up.
 
 Modern mobile security is not about hiding data in transit it is about controlling where that data can be observed.
 
-If your proxy sees nothing,  
-you are probably looking at the wrong layer.
+If your proxy sees nothing, you are probably looking at the wrong layer.
