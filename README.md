@@ -70,6 +70,15 @@ Response:
 
 Usage:
   → Header injected into all subsequent requests
+
+```
+---
+## Verification
+
+The nonce derivation can be independently verified:
+
+```bash
+python verify_nonce.py
 ```
 
 ---
