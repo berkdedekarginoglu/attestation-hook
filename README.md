@@ -1,49 +1,67 @@
-# 🔧 attestation-hook
+# Breaking the Black Box
 
-This is a complete, ready-to-use GitHub repository structure and content for your project.
+Frida-based runtime instrumentation for observing Android attestation pipelines from inside the application layer.
 
 ---
 
-
-### Key Insight
+## Key Insight
 
 Modern mobile attestation does not happen over the network.
+
 It happens inside the device:
 
-- via Binder IPC
-- inside privileged system processes
-- using hardware-backed keys
+- via Binder IPC  
+- inside privileged system processes  
+- using hardware-backed keys  
 
-### Features
+---
+
+## Features
 
 - Hooks OkHttp at execution layer (`RealCall.execute`)
 - Extracts hidden request bodies from internal structures
 - Decodes compressed responses (gzip)
 - Reveals attestation traffic (nonce, tokens, integrity calls)
 
-### Usage
+---
+
+## Usage
 ```bash
 frida -U -f com.twitter.android -l frida/interceptor.js --no-pause
 ```
 
-### Why This Matters
+---
 
-SSL pinning bypass is not enough.
+## Why This Matters
+
+SSL pinning bypass is not enough.  
 If your proxy can't see it, you're looking at the wrong layer.
 
-### Repository Structure
+---
+
+## How It Works
+
+This approach instruments the application at runtime instead of intercepting network traffic:
 ```
-frida/        → Frida instrumentation script
-examples/     → Sample logs and extracted flows
+App Runtime → OkHttp → (hook here) → TLS → Network
 ```
 
-### Disclaimer
+Instead of:
+```
+TLS → Network → Proxy
+```
 
-This project is for educational and research purposes only.
-Do not use it against systems you do not own or have permission to test.
+---
 
+## Repository Structure
+```
+frida/        → Frida instrumentation script  
+examples/     → Sample logs and extracted flows  
+```
 
-## 🧪 examples/sample_attestation_flow.txt
+---
+
+## Example Flow
 ```
 POST /GenerateAttestationNonce
   → nonce: 698b1f52-...
@@ -61,15 +79,28 @@ Usage:
   → Header injected into all subsequent requests
 ```
 
+---
 
 ## Article
+
 Full write-up: https://berkdede.medium.com/breaking-the-black-box-reverse-engineering-twitters-play-integrity-attestation-pipeline-d3dbd2cf37ae
 
+---
 
-## 💬 Final Note
+## Disclaimer
 
-This repo is not just a script dump.
+This project is for educational and research purposes only.  
+Do not use it against systems you do not own or have permission to test.
 
-It is a **research companion** to your write-up.
+---
 
-Make it reflect that.
+## Final Note
+
+This is not just a script.  
+It is a research companion to the write-up.
+
+Modern mobile security is not about hiding data in transit —  
+it is about controlling where that data can be observed.
+
+If your proxy sees nothing,  
+you are probably looking at the wrong layer.
