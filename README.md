@@ -92,8 +92,7 @@ Do not use it against systems you do not own or have permission to test.
 This is not just a script.  
 It is a research companion to the write-up.
 
-Modern mobile security is not about hiding data in transit —  
-it is about controlling where that data can be observed.
+Modern mobile security is not about hiding data in transit it is about controlling where that data can be observed.
 
 If your proxy sees nothing,  
 you are probably looking at the wrong layer.
