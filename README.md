@@ -1,4 +1,6 @@
-<img width="539" height="731" alt="image" src="https://github.com/user-attachments/assets/0d8152ea-4a84-4e72-9b30-31aa864dfe53" />
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/0d8152ea-4a84-4e72-9b30-31aa864dfe53" width="500"/>
+</div>
 
 
 # Breaking the Black Box
