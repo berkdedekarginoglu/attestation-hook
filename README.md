@@ -1,3 +1,6 @@
+<img width="539" height="731" alt="image" src="https://github.com/user-attachments/assets/0d8152ea-4a84-4e72-9b30-31aa864dfe53" />
+
+
 # Breaking the Black Box
 
 Frida-based runtime instrumentation for observing Android attestation pipelines from inside the application layer.
